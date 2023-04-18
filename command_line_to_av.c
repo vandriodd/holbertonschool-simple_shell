@@ -5,7 +5,7 @@
 /**
  * main - splits a string
  *
- * Return: 0 on success
+ * Return: a on success
  */
 int main(void)
 {
@@ -16,8 +16,11 @@ int main(void)
 	while (buffer)
 	{
 		printf("$ ");
-		getline(&buffer, &size, stdin);
-		printf("%s", buffer);
+		if (getline(&buffer, &size, stdin) == -1)
+		{
+			printf("\n");
+			return (-1);
+		}
 
 		token = strtok(buffer, " ");
 		while (token)
