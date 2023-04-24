@@ -4,6 +4,7 @@
 
 #define SIZE 1024
 /**
+ * to_av - entry point
  */
 char *to_av(*str)
 {
