@@ -12,10 +12,10 @@ char *_getenv(char *env)
 
     while (environ[i])
     {
-        tmp = strdup(environ[i]);
+        tmp = strdup(&environ[i]);
         tmp = strtok(tmp, DELIM);
 
-        if (strcmp(tmp, environ[i]) == 0)
+        if (strcmp(tmp, &environ[i]) == 0) /* & for takes not just a char */
         {
             command = strdup(strtok(NULL, DELIM));
             free(tmp);
