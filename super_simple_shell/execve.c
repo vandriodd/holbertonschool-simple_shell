@@ -1,7 +1,5 @@
 #include "main.h"
 
-extern char *environ;
-
 /**
  * _execve - executes a command
  * @args: command & arguments
@@ -11,13 +9,22 @@ extern char *environ;
 int _execve(char **args)
 {
 	int status = 0;
+	pid_t pid = 0;
 
-	if (fork() == 0) /* child process */
+	pid = fork();
+
+	if (pid == -1)
+	{
+		perror("Error");
+		exit(1);
+	}
+	else if (pid == 0) /* child process */
 	{
 		execve(args[0], args, NULL);
 	}
 	else
+	{
 		wait(&status);
-
+	}
 	return (WEXITSTATUS(status));
 }

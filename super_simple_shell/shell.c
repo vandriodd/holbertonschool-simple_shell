@@ -1,7 +1,5 @@
 #include "main.h"
 
-extern char **environ;
-
 /**
  * main - entry point
  *
@@ -9,30 +7,44 @@ extern char **environ;
  */
 int main(void)
 {
-	char *input = NULL, **input_tokenized = {NULL}, *path = NULL, **a = NULL;
+	char *input = NULL, /*, **input_tokenized = {NULL}, */ *dir = NULL /*,*path = NULL*/;
 	size_t size = 0;
+	int /* len = 0, */ i = 0;
 
-	while (1)
+	while (1) /* pa corregir */
 	{
 		printf("♡ ");
 		if (getline(&input, &size, stdin) == -1)
 		{
 			free(input);
+			printf("exit\n");
 			return (-1);
 		}
 
-		input_tokenized = tokenize(input);
+		/* dir = _getenv("PATH");
 
-		path = malloc(sizeof(input_tokenized[0]) + 10); /* 10 = /usr/bin/ */
-		path = _getenv(environ);
-		if (!path)
+		while (i < strlen(dir + 1))
 		{
-			free(input);
-			free(path);
-			return (-1);
-		}
-		a = tokenize(path);
+			printf("%d", dir[i]);
+			i++;
+		} */
 
+		/* if (access(input, X_OK) == 0)
+		{
+			input_tokenized = tokenize(input);
+		}
+		else
+		{
+			input_tokenized = _which(input);
+			len = strlen(input_tokenized);
+			input_tokenized[len + 1] = '/';
+			input_tokenized = strcat(input_tokenized, input);
+			for (i = 0; input_tokenized; i++)
+			{
+				printf("%s", input_tokenized[i]);
+			}
+		}
 		_execve(input_tokenized);
+		*/
 	}
 }
