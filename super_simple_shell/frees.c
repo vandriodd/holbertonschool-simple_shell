@@ -1,7 +1,8 @@
 #include "main.h"
 
 /**
- * aaaaaaaaaaaaaaa
+ * free_array - frees an array
+ * @array: to be free
  */
 void free_array(char **array)
 {
