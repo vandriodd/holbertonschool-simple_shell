@@ -2,11 +2,12 @@
 
 /**
  * _execve - executes a command
+ * @path:
  * @args: command & arguments
  *
  * Return: status of child process
  */
-int _execve(char **args)
+int _execve(char *path, char **args)
 {
 	int status = 0;
 	pid_t pid = 0;
@@ -20,7 +21,7 @@ int _execve(char **args)
 	}
 	else if (pid == 0) /* child process */
 	{
-		execve(args[0], args, NULL);
+		execve(path, args, NULL);
 	}
 	else
 	{

@@ -18,5 +18,6 @@ int len_counter(char *str)
     {
         token = strtok(NULL, DELIM);
     }
+    free(str_copy);
     return (count); /* amount of words */
 }

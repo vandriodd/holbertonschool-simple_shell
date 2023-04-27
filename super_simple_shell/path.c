@@ -14,6 +14,13 @@ char **tokenize(char *str)
 
     len = len_counter(str);
     str_tokenized = malloc(sizeof(char *) * len);
+    if (!str_tokenized)
+    {
+        free(str_tokenized);
+        perror("Error");
+        exit(1);
+    }
+
     token = strtok(str, DELIM);
 
     for (; token; count++) /* stores each token */
@@ -39,59 +46,63 @@ char *_getenv(const char *env)
     {
         if (strncmp(environ[i], env, 4) == 0)
         {
-            path = environ[i + strlen(env) + 1];
+            path = environ[i];
             return (path);
         }
         i++;
     }
     return (NULL);
-
-    /* while (environ[i])
-    {
-        tmp = strdup(&environ[i]);
-        tmp = strtok(tmp, DELIM);
-
-        if (strcmp(tmp, env) == 0) & for takes not just a char
-        {
-            command = strdup(strtok(NULL, DELIM));
-            free(tmp);
-            return (command);
-        }
-        i++;
-        free(tmp);
-    }
-    return (NULL); */
 }
 
 /**
  * _which -
+ * @env_value:
+ * @command:
  *
  * Return:
  */
-char **_which(char *env_value)
+char *_which(char *env_value, char **command)
 {
-    char *token = NULL, *copy_val = NULL, **array = NULL;
-    int i = 0;
+    char *copy_path = NULL, *token = NULL, *value = NULL;
 
-    copy_val = strdup(env_value);
-    token = malloc(sizeof(char *));
-    if (!token)
+    if (access(command[0], F_OK) == 0)
     {
-        free(copy_val);
-        return (NULL);
+        return (command[0]);
     }
-    token = strtok(copy_val, DELIM);
-    array = malloc(sizeof(char *) * strlen(token));
-    if (!array)
+
+    copy_path = strdup(env_value);
+    if (!copy_path)
     {
-        free(copy_val);
-        return (NULL);
+        free(copy_path);
+        perror("Error");
+        exit(1);
     }
-    while (copy_val)
+
+    token = strtok(copy_path, DELIM); /* = */
+
+    while (token)
     {
+        value = malloc(sizeof(char *) + (strlen(env_value) + strlen(command[0])) + 2);
+        strcpy(value, token);
+        strcat(value, "/");
+        strcat(value, command[0]); /* concats the command to the path */
+
+        if (!value)
+        {
+            free(copy_path);
+            return (value);
+        }
+
+        if (access(value, F_OK) == 0)
+        {
+            free(copy_path);
+            return (value);
+        }
+
+        token = NULL;
         token = strtok(NULL, DELIM);
-        array[i] = token;
-        i++;
     }
-    return (array);
+    free(copy_path);
+    free(value);
+    return (0);
 }
