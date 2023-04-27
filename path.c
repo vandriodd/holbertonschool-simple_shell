@@ -9,7 +9,7 @@
 char **tokenize(char *str)
 {
 	char **str_tokenized = {NULL}, *token = NULL;
-	size_t count = 0, i = 0;
+	size_t count = 0;
 	int len = 0;
 
 	len = len_counter(str);
@@ -30,8 +30,6 @@ char **tokenize(char *str)
 	}
 	/* inserte NULL ptr */
 	str_tokenized[count] = NULL;
-	for (i = 0; i < count; i++)
-		printf("%s\n", str_tokenized[i]);
 	return (str_tokenized);
 }
 
