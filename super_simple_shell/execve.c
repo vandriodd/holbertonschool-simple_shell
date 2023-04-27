@@ -2,12 +2,12 @@
 
 /**
  * _execve - executes a command
- * @path:
+ * @path: command path
  * @args: command & arguments
  *
- * Return: status of child process
+ * Return: void
  */
-int _execve(char *path, char **args)
+void _execve(char *path, char **args)
 {
 	int status = 0;
 	pid_t pid = 0;
@@ -27,5 +27,5 @@ int _execve(char *path, char **args)
 	{
 		wait(&status);
 	}
-	return (WEXITSTATUS(status));
+	return;
 }
