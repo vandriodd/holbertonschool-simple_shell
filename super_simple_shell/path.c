@@ -8,12 +8,12 @@
  */
 char **tokenize(char *str)
 {
-    char **str_tokenized = NULL, *token = NULL;
+    char **str_tokenized = {NULL}, *token = NULL;
     size_t count = 0;
     int len = 0;
 
     len = len_counter(str);
-    str_tokenized = malloc(sizeof(char *) * len);
+    str_tokenized = malloc(sizeof(char *) * (len + 1)); /* + 1 = ptr NULL */
     if (!str_tokenized)
     {
         free(str_tokenized);
@@ -28,6 +28,8 @@ char **tokenize(char *str)
         str_tokenized[count] = token;
         token = strtok(NULL, DELIM);
     }
+    /* inserte NULL ptr */
+    str_tokenized[count] = NULL;
     return (str_tokenized);
 }
 
@@ -55,11 +57,11 @@ char *_getenv(const char *env)
 }
 
 /**
- * _which -
- * @env_value:
- * @command:
+ * _which - show the full path of command
+ * @env_value: value of path
+ * @command: command input
  *
- * Return:
+ * Return: the specific path of the command
  */
 char *_which(char *env_value, char **command)
 {
@@ -78,11 +80,11 @@ char *_which(char *env_value, char **command)
         exit(1);
     }
 
-    token = strtok(copy_path, DELIM); /* = */
+    token = strtok(copy_path, DELIM);                                            /* = */
+    value = malloc(sizeof(char) * (strlen(env_value) + strlen(command[0])) + 2); /* + 2 = / & \0 */
 
     while (token)
     {
-        value = malloc(sizeof(char *) + (strlen(env_value) + strlen(command[0])) + 2);
         strcpy(value, token);
         strcat(value, "/");
         strcat(value, command[0]); /* concats the command to the path */
@@ -104,5 +106,6 @@ char *_which(char *env_value, char **command)
     }
     free(copy_path);
     free(value);
+    free(token);
     return (0);
 }
