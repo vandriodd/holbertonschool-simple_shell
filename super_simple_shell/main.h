@@ -20,7 +20,7 @@ extern char **environ;
 int len_counter(char *str);
 char **tokenize(char *str);
 char *_getenv(const char *env);
-void _execve(char *path, char **args);
+int _execve(char *path, char **args);
 char *_which(char *env_value, char **command);
 void free_array(char **array);
 
