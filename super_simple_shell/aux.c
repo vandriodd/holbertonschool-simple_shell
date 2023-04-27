@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * len_counter -
- * @str:
+ * len_counter - counts the number of words in a string
+ * @str: string input
  *
- * Return:
+ * Return: amount of words counted
  */
 int len_counter(char *str)
 {
