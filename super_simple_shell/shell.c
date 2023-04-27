@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * main - entry point
+ * main - shell function
  *
- * Return:
+ * Return: exit status
  */
 int main(void)
 {
@@ -15,15 +15,24 @@ int main(void)
 		printf("♡ ");
 		if (getline(&input, &size, stdin) == -1)
 		{
-			free(input);
-			/* free_array(input_tokenized); */ /* this free causes double free in tcache 2 */
 			printf("exit\n");
 			exit(1);
 		}
 
 		dir = _getenv("PATH"); /* gets the whole PATH env */
+		if (!dir)
+		{
+			free(dir);
+			perror("Error");
+			exit(1);
+		}
+
 		input_tokenized = tokenize(input);
+
 		full_path = _which(dir, input_tokenized);
 		_execve(full_path, input_tokenized);
+
+		free(full_path);
+		free_array(input_tokenized);
 	}
 }
