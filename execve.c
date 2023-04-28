@@ -21,7 +21,7 @@ int _execve(char *path, char **args)
 	}
 	else if (pid == 0) /* child process */
 	{
-		if (execve(path, args, NULL) == -1)
+		if (execve(path, args, environ) == -1)
 		{
 			free(path);
 			free(args);
@@ -32,5 +32,5 @@ int _execve(char *path, char **args)
 	{
 		wait(&status);
 	}
-	return(WEXITSTATUS(status));
+	return (WEXITSTATUS(status));
 }
