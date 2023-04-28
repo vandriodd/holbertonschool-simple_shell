@@ -27,14 +27,14 @@ int main(void)
 		if (strcmp(input, "exit\n") == 0)
 		{ free(input);
 			break; }
-		if (inval_prompt(input) == 0)
-			continue;
-
 		dir = _getenv("PATH"); /*gets the whole PATH env*/
 		if (!dir)
 			free(input), perror("Error"), exit(127);
 
 		input_tokenized = tokenize(input);
+		if (input_tokenized[0] == NULL)
+			continue;
+
 		if (access(input_tokenized[0], F_OK) == 0)
 			_execve(input_tokenized[0], input_tokenized);
 		else

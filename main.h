@@ -15,6 +15,7 @@ extern char **environ;
 
 /* Macros */
 #define DELIM " \n\t\a\r:="
+#define INV " \t\n"
 
 /* Prototypes */
 int len_counter(char *str);
