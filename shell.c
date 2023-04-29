@@ -22,8 +22,8 @@ int main(void)
 		if (getline_input == -1)
 		{ free(input);
 			if (shell_mode == 1)
-				printf("\n");
-			exit(1); }
+				printf("\n"), exit(1);
+			exit(0); }
 		if (strcmp(input, "exit\n") == 0)
 		{ free(input);
 			break; }
