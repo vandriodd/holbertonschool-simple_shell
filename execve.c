@@ -12,14 +12,14 @@ int _execve(char *path, char **args)
 	int status = 0;
 	pid_t pid = 0;
 
-	pid = fork();
+	pid = fork(); /*forks the shell process*/
 
-	if (pid == -1)
+	if (pid == -1) /*in case of forking error*/
 	{
 		perror("Error");
 		exit(1);
 	}
-	else if (pid == 0) /* child process */
+	else if (pid == 0) /*child process*/
 	{
 		if (execve(path, args, environ) == -1)
 		{
@@ -28,9 +28,9 @@ int _execve(char *path, char **args)
 			exit(EXIT_FAILURE);
 		}
 	}
-	else
+	else /*resume the father process when child process finishes*/
 	{
 		wait(&status);
 	}
-	return (WEXITSTATUS(status));
+	return (WEXITSTATUS(status)); /*returns exit status of wait sys call*/
 }

@@ -10,40 +10,40 @@ char *_which(char *env_value, char **command)
 {
 	char *copy_path = NULL, *token = NULL, *value = NULL;
 
-	copy_path = strdup(env_value);
-	if (!copy_path)
+	copy_path = strdup(env_value);/*copy env var for further tokenization*/
+	if (!copy_path) /*malloc error return*/
 	{
 		free(copy_path);
 		perror("Error");
 		exit(1);
 	}
 
-	token = strtok(copy_path, DELIM);
+	token = strtok(copy_path, DELIM); /*first tokenization*/
 	value = malloc(sizeof(char) * (strlen(env_value) + strlen(command[0])) + 2);
 
-	while (token)
+	while (token) /*tries to create a full path for further execution*/
 	{
 		strcpy(value, token);
 		strcat(value, "/");
 		strcat(value, command[0]); /* concats the command to the path */
 
-		if (!value)
+		if (!value) /*in case concatenization fails*/
 		{
 			free(copy_path);
 			return (NULL);
 		}
 
-		if (access(value, F_OK) == 0)
+		if (access(value, F_OK) == 0) /*in case full function path exist*/
 		{
 			free(copy_path);
 			return (value);
 		}
 
 		token = NULL;
-		token = strtok(NULL, DELIM);
+		token = strtok(NULL, DELIM); /*continues tokenization*/
 	}
 	free(copy_path);
 	free(value);
 	free(token);
-	return (NULL);
+	return (NULL); /*in case no func full path is found*/
 }

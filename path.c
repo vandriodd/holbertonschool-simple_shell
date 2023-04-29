@@ -12,24 +12,23 @@ char **tokenize(char *str)
 	size_t count = 0;
 	int len = 0;
 
-	len = len_counter(str);
-	str_tokenized = malloc(sizeof(char *) * (len + 1)); /* + 1 = ptr NULL */
-	if (!str_tokenized)
+	len = len_counter(str); /*counts the amount of words in str*/
+	str_tokenized = malloc(sizeof(char *) * (len + 1));
+	if (!str_tokenized) /*malloc error case return*/
 	{
 		free(str_tokenized);
 		perror("Error");
 		exit(1);
 	}
 
-	token = strtok(str, DELIM);
+	token = strtok(str, DELIM); /*tokenizes str with delim defined in header*/
 
 	for (; token; count++) /* stores each token */
 	{
-		str_tokenized[count] = token;
-		token = strtok(NULL, DELIM);
+		str_tokenized[count] = token; /*store*/
+		token = strtok(NULL, DELIM); /*generate new token*/
 	}
-	/* inserte NULL ptr */
-	str_tokenized[count] = NULL;
+	str_tokenized[count] = NULL; /*adds NULL at the end of token array*/
 	return (str_tokenized);
 }
 
@@ -44,14 +43,14 @@ char *_getenv(const char *env)
 	char *path = NULL;
 	int i = 0;
 
-	while (environ[i])
+	while (environ[i]) /*searches in environ for the variable equal to env*/
 	{
-		if (strncmp(environ[i], env, 4) == 0)
+		if (strncmp(environ[i], env, 4) == 0) /*if env var found*/
 		{
 			path = environ[i];
-			return (path);
+			return (path); /*returns full env var requested*/
 		}
 		i++;
 	}
-	return (NULL);
+	return (NULL); /*if no env var found*/
 }
