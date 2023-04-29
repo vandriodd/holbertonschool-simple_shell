@@ -58,7 +58,7 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c main.h -o hsh
 ```
 
 ### How it works
-![test](https://user-images.githubusercontent.com/110431271/235321645-f3734be9-b811-48b1-858c-71513d076e8e.gif)
+![shell-test](https://user-images.githubusercontent.com/110431271/235328103-f701ba7f-d698-4c5d-822d-2eeeadbb43db.gif)
 
 ### Interactive and non-interactive mode
 In the testing section of the project proposal it is clarified that the shell **should be functional in both interactive and non-interactive mode**, that is, it should be able to execute commands in the following ways:
