@@ -43,7 +43,36 @@ $ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 -Wno-format *.c
 * Use [Betty's style](https://github.com/holbertonschool/Betty/wiki)
 
 ## Files
-Placeholder
+
+<details>
+<summary>shell.c</summary>
+The main function for the shell. Contains function call for all other functions.
+</details>
+
+<details>
+<summary>path.c</summary>
+Contains _getenv which retrieves a specific environmental variable from “environ”, and tokenize, a function for tokenization with strtok.
+</details>
+
+<details>
+<summary>which.c</summary>
+Generates the full path of a function, concatenating a specific part of PATH environmental variable according to the function alias it takes as an argument.
+</details>
+
+<details>
+<summary>execve.c</summary>
+Forks the parent process and executes the function requested on the input.
+</details>
+
+<details>
+<summary>aux.c</summary>
+Contains auxiliar functions used in the previously explained functions.
+</details>
+
+<details>
+<summary>main.h</summary>
+Header file, containing all the prototypes of the previously explained functions, macro definitions, libraries call, and the environ variable.
+</details>
 
 ## Usage
 ### Instalation
