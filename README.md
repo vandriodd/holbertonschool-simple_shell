@@ -71,7 +71,7 @@ $ echo "/bin/ls" | ./hsh
 ```
 
 ### Flowchart
-Placeholder
+![Simple Shell](https://user-images.githubusercontent.com/110431271/235359201-34246756-98c8-44b0-ada9-df60988ecd5e.jpg)
 
 <div align="center">
 
@@ -86,6 +86,6 @@ Placeholder
 
 <br>
 
-_Last updated: April 29, 2023_
+_Last updated: April 30, 2023_
 
 </div>
